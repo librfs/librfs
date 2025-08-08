@@ -1,0 +1,9 @@
+[submodule "ess"]
+	path = ess
+	url = git@github.com:librfs/rfs-ess.git
+[submodule "fuse"]
+	path = fuse
+	url = git@github.com:librfs/rfs-fuse.git
+[submodule "pool"]
+	path = pool
+	url = git@github.com:librfs/rfs-pool.git
