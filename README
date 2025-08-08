@@ -1,0 +1,14 @@
+rfs filesystem
+
+rfs is a large-scale project consisting of multiple components, each managed as a separate git submodule within this repository.
+
+All licenses used by this project are available in the LICENSES/ directory.
+To determine the specific license applied to each subproject, please refer to the README and LICENSE files located within the respective subproject directories.
+
+Source files in this project must begin with the following header format:
+
+  src/filename.rs
+  SPDX-License-Identifier: license
+  Copyright (c) year author
+
+This header ensures consistent license attribution and copyright declaration across the codebase.
