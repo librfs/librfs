@@ -7,3 +7,6 @@
 [submodule "rfs-pool"]
 	path = pool
 	url = git@github.com:librfs/rfs-pool.git
+[submodule "rfs-db"]
+	path = db
+	url = git@github.com:librfs/rfs-db.git
