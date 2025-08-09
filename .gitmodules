@@ -10,3 +10,6 @@
 [submodule "rfs-db"]
 	path = db
 	url = git@github.com:librfs/rfs-db.git
+[submodule "rfs-utils"]
+	path = utils
+	url = git@github.com:librfs/rfs-utils.git
