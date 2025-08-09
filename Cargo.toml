@@ -20,3 +20,6 @@ rfs-ess = { path = "ess" }
 rfs-utils = { path = "utils" }
 rfs-pool = { path = "pool" }
 rfs-fuse = { path = "fuse" }
+tokio = { version = "1", features = ["full"] }
+tokio-stream = "0.1.17"
+axum = "0.8.4"
