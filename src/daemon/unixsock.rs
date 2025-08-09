@@ -5,6 +5,7 @@
 use rfs_utils::{log, LogLevel};
 use std::path::Path;
 use tokio::net::UnixListener;
+use tokio::time::{sleep, Duration};
 
 pub async fn bind(path_str: &str) -> std::io::Result<UnixListener> {
     let path = Path::new(path_str);
@@ -12,7 +13,22 @@ pub async fn bind(path_str: &str) -> std::io::Result<UnixListener> {
     if tokio::fs::try_exists(path).await? {
         log(
             LogLevel::Warn,
-            &format!("Socket path {} already exists. Removing.", path.display()),
+            &format!("Socket path {} already exists.", path.display()),
+        );
+        log(
+            LogLevel::Warn,
+            "Will attempt to overwrite in 3 seconds.",
+        );
+        log(
+            LogLevel::Warn,
+            "If another instance is running, press Ctrl+C now to abort.",
+        );
+
+        sleep(Duration::from_secs(3)).await;
+
+        log(
+            LogLevel::Info,
+            &format!("Removing existing socket: {}", path.display()),
         );
         tokio::fs::remove_file(path).await?;
     }

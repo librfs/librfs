@@ -3,23 +3,31 @@
 // Copyright (c) 2025 Canmi
 
 use crate::daemon::{router, unixsock};
+use rfs_ess::Config; // Import the Config struct
 use rfs_utils::{log, LogLevel};
 
-const SOCKET_PATH: &str = "/opt/rfs/rfsd/rfsd.sock";
+// run now takes the configuration as a parameter
+pub async fn run(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
+    log(LogLevel::Info, "Starting rfsd daemon...");
 
-pub async fn run() -> Result<(), Box<dyn std::error::Error>> {
-    let listener = unixsock::bind(SOCKET_PATH).await?;
+    // Read socket path directly from the passed-in config
+    let socket_path = config.rfsd.unix_socket.clone();
+
+    log(LogLevel::Debug, "Calling unixsock::bind...");
+    let listener = unixsock::bind(&socket_path).await?;
+    log(LogLevel::Debug, "unixsock::bind call returned successfully.");
+
     let app = router::create_router();
-    log(LogLevel::Info, &format!("Server listening on {}", SOCKET_PATH));
+    log(LogLevel::Debug, "Router created.");
 
-    // shutdown signal handler
+    log(LogLevel::Info, &format!("Server listening on {}", socket_path));
+
     axum::serve(listener, app.into_make_service())
         .with_graceful_shutdown(shutdown_signal())
         .await?;
 
-    // shutdown
     log(LogLevel::Info, "Server has shut down. Cleaning up resources.");
-    if let Err(e) = tokio::fs::remove_file(SOCKET_PATH).await {
+    if let Err(e) = tokio::fs::remove_file(&socket_path).await {
         log(
             LogLevel::Error,
             &format!("Failed to remove socket file on shutdown: {}", e),
@@ -27,7 +35,7 @@ pub async fn run() -> Result<(), Box<dyn std::error::Error>> {
     } else {
         log(
             LogLevel::Info,
-            &format!("Successfully removed socket: {}", SOCKET_PATH),
+            &format!("Successfully removed socket: {}", socket_path),
         );
     }
 
@@ -59,4 +67,6 @@ async fn shutdown_signal() {
         },
         _ = terminate => log(LogLevel::Info, "Received terminate signal."),
     }
+
+    log(LogLevel::Info, "Initiating graceful shutdown.");
 }
