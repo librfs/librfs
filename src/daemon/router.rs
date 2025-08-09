@@ -5,9 +5,9 @@
 use axum::{routing::get, Router};
 
 pub fn create_router() -> Router {
-    Router::new().route("/", get(root_handler))
+    Router::new().route("/", get(get_root_handler))
 }
 
-async fn root_handler() -> &'static str {
-    "Hello"
+async fn get_root_handler() -> &'static str {
+    "PONG"
 }

@@ -9,7 +9,7 @@ use rfs_utils::{log, LogLevel};
 #[tokio::main]
 async fn main() {
     log(LogLevel::Info, "Starting rfsd daemon...");
-    if let Err(e) = daemon::bootstrap::start().await {
+    if let Err(e) = daemon::bootstrap::run().await {
         log(LogLevel::Error, &format!("Daemon failed to start: {}", e));
         std::process::exit(1);
     }
