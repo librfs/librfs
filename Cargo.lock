@@ -5,6 +5,12 @@ version = 4
 [[package]]
 name = "librfs"
 version = "0.1.0"
+dependencies = [
+ "rfs-ess",
+ "rfs-fuse",
+ "rfs-pool",
+ "rfs-utils",
+]
 
 [[package]]
 name = "rfs-db"
@@ -20,4 +26,8 @@ version = "0.1.0"
 
 [[package]]
 name = "rfs-pool"
+version = "0.1.0"
+
+[[package]]
+name = "rfs-utils"
 version = "0.1.0"

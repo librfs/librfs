@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [workspace]
-members = ["ess", "fuse", "pool", "db"]
+members = ["ess", "fuse", "pool", "db", "utils"]
 
 [lib]
 name = "rfs"
@@ -16,3 +16,7 @@ name = "librfs"
 path = "src/main.rs"
 
 [dependencies]
+rfs-ess = { path = "ess" }
+rfs-utils = { path = "utils" }
+rfs-pool = { path = "pool" }
+rfs-fuse = { path = "fuse" }
