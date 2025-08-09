@@ -12,7 +12,7 @@ crate-type = ["rlib", "cdylib"]
 path = "src/lib.rs"
 
 [[bin]]
-name = "librfs"
+name = "rfsd"
 path = "src/main.rs"
 
 [dependencies]
