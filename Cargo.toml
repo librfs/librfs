@@ -3,7 +3,16 @@ name = "librfs"
 version = "0.1.0"
 edition = "2024"
 
-[dependencies]
-
 [workspace]
 members = ["ess", "fuse", "pool", "db"]
+
+[lib]
+name = "rfs"
+crate-type = ["rlib", "cdylib"]
+path = "src/lib.rs"
+
+[[bin]]
+name = "librfs"
+path = "src/main.rs"
+
+[dependencies]

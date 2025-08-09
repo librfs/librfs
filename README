@@ -5,6 +5,8 @@ rfs is a large-scale project consisting of multiple components, each managed as 
 All licenses used by this project are available in the LICENSES/ directory.
 To determine the specific license applied to each subproject, please refer to the README and LICENSE files located within the respective subproject directories.
 
+Simply put, the core of rfs is licensed under MIT and GPL-2.0-or-later, while the fuse and networking components are licensed under AGPL-3.0. Since librfs includes all functionalities, it contains crates licensed under GPL-2.0-or-later and is thus upgraded to GPL-3.0 for compatibility with AGPL-3.0, making the entire librfs project licensed under AGPL-3.0. The rfsd daemon is a standalone process communicating with librfs via Unix sockets and is licensed under MIT. The rfsv CLI tool is licensed under GPL-2.0-only.
+
 Source files in this project must begin with the following header format:
 
   src/filename.rs
