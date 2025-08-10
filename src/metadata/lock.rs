@@ -61,7 +61,11 @@ impl Drop for FileLock {
             );
         } else {
             // Using eprintln here as our logger might not be available during a panic.
-            eprintln!("Released lock: {}", self.lock_path.display());
+            //eprintln!("Released lock: {}", self.lock_path.display());
+            log(
+                LogLevel::Debug,
+                &format!("Released lock: {}", self.lock_path.display()),
+            );
         }
     }
 }

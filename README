@@ -18,3 +18,5 @@ Source files in this project must begin with the following header format:
   Copyright (c) year author
 
 This header ensures consistent license attribution and copyright declaration across the codebase.
+
+The librfs project originally planned to include built-in FUSE support. However, it was later realized that rfs should function as a stable and independent service, and whether to mount rfs should be left to the user’s discretion. Therefore, rfs-fuse was separated into its own project, which depends on librfs. The rfsd daemon now solely manages the rfs processes running on the operating system. Due to the early inclusion of FUSE, parts of the librfs codebase still contain AGPL-3.0 licensed code that will no longer be modified, so the overall license has been upgraded to AGPL-3.0.
