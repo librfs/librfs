@@ -16,6 +16,18 @@ use tokio::fs;
 const METADATA_DIR: &str = "metadata";
 const LISTING_FILE: &str = "metadata.json";
 
+// New function to read the contents of a directory.
+pub async fn list_directory(
+    pool_root: &str,
+    rfs_dir_path: &str,
+) -> Result<DirectoryListing, MetadataError> {
+    let dir_components = path_utils::validate_and_split_path(rfs_dir_path)?;
+    let target_dir_path = resolve_dir_path(pool_root, &dir_components).await?;
+    let listing = read_listing(&target_dir_path).await?;
+    Ok(listing)
+}
+
+
 // Creates a file with its associated metadata and triggers a recursive update.
 pub async fn create_file(
     pool_root: &str,

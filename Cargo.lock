@@ -831,8 +831,10 @@ version = "0.1.0"
 dependencies = [
  "fuser",
  "libc",
+ "librfs",
  "nix 0.30.1",
  "rfs-ess",
+ "rfs-pool",
  "rfs-utils",
  "signal-hook",
  "thiserror",
